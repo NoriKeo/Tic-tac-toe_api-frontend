@@ -125,7 +125,7 @@ function match(clicked_id) {
         const playerButton = document.getElementById(data.move);
         const computerButton = document.getElementById(data.computerMove);
 
-        alert(move,computerMove)
+        alert(data.move,data.computerMove)
         if (playerButton) {
             playerButton.style.backgroundColor = 'Aquamarine'; 
         }
