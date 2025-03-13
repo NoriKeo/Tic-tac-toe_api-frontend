@@ -1,0 +1,52 @@
+.button {
+    
+        border: none;
+        color: white;
+        padding: 20px 40px; 
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px; 
+        margin: 4px 2px;
+        cursor: pointer;
+        position: fixed; 
+       
+        transform: translateX(-50%); 
+        border-radius: 10px;
+    
+    
+  }
+
+  .input {
+
+    border: none;
+    color: white;
+    padding: 20px 40px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px; 
+    margin: 4px 2px;
+    cursor: pointer;
+    position: fixed; 
+    left: 50%;
+    transform: translateX(-50%); 
+    border-radius: 10px;
+
+
+
+}
+
+    .input1 {bottom: 500px;}
+    .input2 {bottom: 400px;}
+  .button1 {
+    background-color: #4800ff;
+    bottom: 300px; 
+    left: 50%;
+    }
+
+    .button2{
+        background-color: #4800ff;
+        bottom: 900px; 
+        left: 10%;
+    }

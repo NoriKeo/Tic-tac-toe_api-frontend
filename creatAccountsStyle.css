@@ -1,0 +1,67 @@
+.button {
+    
+        border: none;
+        color: white;
+        padding: 20px 40px; 
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 20px; 
+        margin: 4px 2px;
+        cursor: pointer;
+        position: fixed; 
+        transform: translateX(-50%); 
+        border-radius: 10px;
+    
+    
+  }
+
+  .input {
+
+    border: none;
+    color: white;
+    padding: 20px 40px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px; 
+    margin: 4px 2px;
+    cursor: pointer;
+    position: fixed; 
+    left: 50%;
+    transform: translateX(-50%); 
+    border-radius: 10px;
+
+
+
+}
+.question{
+  border: none;
+  color: white;
+  padding: 20px 40px; 
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 25px; 
+  margin: 4px 2px;
+  cursor: pointer;
+  position: fixed; 
+  bottom: 500px;
+  left: 50%;
+  transform: translateX(-50%); 
+  border-radius: 10px;
+
+
+}
+
+    .input1 {bottom: 700px;}
+    .input2 {bottom: 600px;}
+    .input3 {bottom: 400px;}
+  .button3creatAccount {
+    background-color: #4800ff;
+    bottom: 300px; 
+    left: 50%;
+    }
+
+    
+    
