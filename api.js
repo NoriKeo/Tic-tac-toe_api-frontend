@@ -118,6 +118,7 @@ function match(clicked_id) {
         const matchId = data.matchID;
         const score = data.score; */
 
+        alert(data.winner);
         if(data.winner > 0){
             window.location.href = 'win.html';
         }
