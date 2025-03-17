@@ -151,11 +151,11 @@ if (data.winner > 0) {
 
     let message = "Unbekanntes Ergebnis";
     if (winner == 1) {
-        message = "Glückwunsch! Du hast gewonnen!";
+        message = "You won!";
     } else if (winner == 2) {
-        message = "Leider verloren! Der Computer hat gewonnen.";
+        message = "You lost";
     } else if (winner == 3) {
-        message = "Es ist ein Unentschieden!";
+        message = "draw";
     }
 
     document.getElementById('resultMessage').textContent = message;
