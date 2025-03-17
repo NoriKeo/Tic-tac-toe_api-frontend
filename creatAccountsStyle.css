@@ -1,7 +1,7 @@
 .button {
     
         border: none;
-        color: white;
+        color: #464545;
         padding: 20px 40px; 
         text-align: center;
         text-decoration: none;
@@ -16,10 +16,23 @@
     
   }
 
+
+
+  body {
+    text-align: center;
+    font-family: "Sour Gummy", sans-serif;
+    background: url('img/backgroundgif.gif') no-repeat center center fixed;
+    background-size: cover; 
+    
+}
+
+
+
+
   .input {
 
     border: none;
-    color: white;
+    color: #464545;
     padding: 20px 40px; 
     text-align: center;
     text-decoration: none;
@@ -31,13 +44,14 @@
     left: 50%;
     transform: translateX(-50%); 
     border-radius: 10px;
+    background-color: #ecd59f;
 
 
 
 }
 .question{
   border: none;
-  color: white;
+  color: #464545;
   padding: 20px 40px; 
   text-align: center;
   text-decoration: none;
@@ -58,7 +72,7 @@
     .input2 {bottom: 600px;}
     .input3 {bottom: 400px;}
   .button3creatAccount {
-    background-color: #4800ff;
+    background-color: #Adb1dc;
     bottom: 300px; 
     left: 50%;
     }

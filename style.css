@@ -1,7 +1,7 @@
 .button {
     
         border: none;
-        color: white;
+        color: #464545;
         padding: 20px 40px; 
         text-align: center;
         text-decoration: none;
@@ -10,6 +10,7 @@
         margin: 4px 2px;
         cursor: pointer;
         position: fixed; 
+
        
         transform: translateX(-50%); 
         border-radius: 10px;
@@ -17,10 +18,19 @@
     
   }
 
+  body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    background: url('img/backgroundgif.gif') no-repeat center center fixed;
+    background-size: cover; 
+    
+}
+
+
   .input {
 
     border: none;
-    color: white;
+    color: #464545;
     padding: 20px 40px; 
     text-align: center;
     text-decoration: none;
@@ -37,16 +47,18 @@
 
 }
 
-    .input1 {bottom: 500px;}
-    .input2 {bottom: 400px;}
+    .input1 {bottom: 500px;
+    background-color: #ecd59f;}
+    .input2 {bottom: 400px;
+      background-color: #ecd59f;}
   .button1 {
-    background-color: #4800ff;
+    background-color: #Adb1dc;
     bottom: 300px; 
     left: 50%;
     }
 
     .button2{
-        background-color: #4800ff;
+        background-color: #Adb1dc;
         bottom: 900px; 
         left: 10%;
     }

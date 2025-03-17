@@ -2,6 +2,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("login").addEventListener("click", login);
     document.getElementById("creat").addEventListener("click", creat); 
+    document.getElementById("newGame").addEventListener("click", newGame);
     document.getElementById("creatAccount").addEventListener("click", creatAccount);
     for (let i = 1; i <= 9; i++) {
         document.getElementById(i).addEventListener("click", function () {
@@ -43,6 +44,9 @@ function login() {
 function creat() {
     window.location.href = 'creatAccount.html';
 }
+function newGame() {
+    window.location.href = 'game.html';
+}
 
 function creatAccount(){
     const playerName = document.getElementById('playerName').value;
@@ -77,16 +81,6 @@ function creatAccount(){
 
 }
 
-/* document.addEventListener("DOMContentLoaded", function () {
-   
-    for (let i = 1; i <= 9; i++) {
-        document.getElementById(i).addEventListener("click",match);
-       
-    }
-    console.log("LocalStorage nach Laden der Seite:", localStorage.getItem("playerId"));
-    
-});
- */
 
 function match(clicked_id) {
     console.log("LocalStorage direkt nach Laden der Seite:", localStorage.getItem("playerId"));
@@ -111,33 +105,108 @@ function match(clicked_id) {
     .then(response => response.json())
 
     .then(data => {
-        console.log("Server-Antwort:", data); 
-       
+        
 
-        /* const message = data.message;  
-        const matchId = data.matchID;
-        const score = data.score; */
+        console.log("Server-Antwort:", data);
 
-        alert(data.winner);
-        if(data.winner > 0){
-            window.location.href = 'win.html';
+let playerPosition = data.playerPosition;
+if (playerPosition && playerPosition.length > 0) {
+    playerPosition.forEach(id => {
+        let button = document.getElementById(id);
+        if (button) {
+            button.style.backgroundImage = "url('./img/player.png')";
+            button.style.backgroundSize = "cover";
+            button.style.backgroundPosition = "center";
+            console.log("Spielerfeld gefärbt:", id);
         }
+    });
+}
 
-        const playerButton = document.getElementById(data.move);
-        const computerButton = document.getElementById(data.computerMove);
-
-        alert(data.move,data.computerMove)
-        if (playerButton) {
-            playerButton.style.backgroundColor = 'Aquamarine'; 
+let computerPlays = data.computerPlays;
+if (computerPlays && computerPlays.length > 0) {
+    computerPlays.forEach(id => {
+        let button = document.getElementById(id);
+        if (button) {
+            button.style.backgroundImage = "url('img/computer2.0.png')";
+            button.style.backgroundSize = "cover";
+            button.style.backgroundPosition = "center";
+            console.log("Computerfeld gefärbt:", id);
         }
+    });
+}
 
-        if (computerButton) {
-            computerButton.style.backgroundColor = 'CornflowerBlue';  
-        }
+alert("win");
+if (data.winner > 0) {
+    localStorage.setItem('win', data.winner);
+    //localStorage.setItem('score', data.score);
+
+    const winner = localStorage.getItem('win');
+    //const score = JSON.parse(localStorage.getItem('score'));
+    alert(data.score)
+    //document.getElementById('scoreDisplay').textContent = data.score ? data.score.join(" - ") : "Kein Score verfügbar";
+    document.getElementById('scoreDisplay').textContent = data.score 
+    ? `Player:  ${data.score[0]} | Computer: ${data.score[1]} | draw: ${data.score[2]}`
+    : "Kein Score verfügbar";
+
+
+    let message = "Unbekanntes Ergebnis";
+    if (winner == 1) {
+        message = "Glückwunsch! Du hast gewonnen!";
+    } else if (winner == 2) {
+        message = "Leider verloren! Der Computer hat gewonnen.";
+    } else if (winner == 3) {
+        message = "Es ist ein Unentschieden!";
+    }
+
+    document.getElementById('resultMessage').textContent = message;
+
+    const newGameButton = document.createElement('button');
+    newGameButton.textContent = 'new Game';
+    newGameButton.onclick = function() {
+        location.reload();
+    };
+
+    document.getElementById('resultContainer').appendChild(newGameButton);
+
+    const buttons = document.querySelectorAll('.button');
+    buttons.forEach(button => {
+        button.disabled = true; 
+    });
+
+    document.getElementById('resultContainer').style.display = 'block'; // Sichtbar machen
+} else {
+    console.log('Kein Ergebnis gefunden.');
+}
+
+
+const playerButton = document.getElementById(data.move);
+const computerButton = document.getElementById(data.computerMove);
+
+alert(`Letzter Spielzug: Spieler  ${data.move}, Computer  ${data.computerMove}`);
+
+if (playerButton) {
+    playerButton.style.backgroundImage = "url('./img/player.png')";
+    playerButton.style.backgroundSize = "cover";
+    playerButton.style.backgroundPosition = "center";
+    
+}
+
+if (computerButton) {
+    computerButton.style.backgroundImage = "url('img/computer2.0.png')";
+    computerButton.style.backgroundSize = "cover";
+    computerButton.style.backgroundPosition = "center";
+}
+
     })
     .catch(error => {
         console.error('Fehler bei der Anfrage:', error);
     });
 }
 
+
+function showresult() {
+
+
+
+}
 
