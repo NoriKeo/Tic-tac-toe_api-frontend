@@ -135,14 +135,13 @@ if (computerPlays && computerPlays.length > 0) {
     });
 }
 
-alert("win");
+
 if (data.winner > 0) {
     localStorage.setItem('win', data.winner);
     //localStorage.setItem('score', data.score);
-
+    //alert("win");
     const winner = localStorage.getItem('win');
     //const score = JSON.parse(localStorage.getItem('score'));
-    alert(data.score)
     //document.getElementById('scoreDisplay').textContent = data.score ? data.score.join(" - ") : "Kein Score verfügbar";
     document.getElementById('scoreDisplay').textContent = data.score 
     ? `Player:  ${data.score[0]} | Computer: ${data.score[1]} | draw: ${data.score[2]}`
@@ -182,7 +181,6 @@ if (data.winner > 0) {
 const playerButton = document.getElementById(data.move);
 const computerButton = document.getElementById(data.computerMove);
 
-alert(`Letzter Spielzug: Spieler  ${data.move}, Computer  ${data.computerMove}`);
 
 if (playerButton) {
     playerButton.style.backgroundImage = "url('./img/player.png')";
