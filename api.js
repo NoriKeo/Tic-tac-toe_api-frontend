@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("creat").addEventListener("click", creat); 
     document.getElementById("newGame").addEventListener("click", newGame);
     document.getElementById("creatAccount").addEventListener("click", creatAccount);
+    document.getElementById("loginpage").addEventListener("click", loginpage)
+    document.getElementById("matchHistory").addEventListener("click", matchHistoryload);
     for (let i = 1; i <= 9; i++) {
         document.getElementById(i).addEventListener("click", function () {
             match(i); 
@@ -12,6 +14,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     console.log("LocalStorage nach Laden der Seite:", localStorage.getItem("playerId"));
 });
+
+function loginpage(){
+    window.location.href = 'init.html';
+}
+function matchHistoryload(){
+    window.location.href = 'matchHistory.html';
+}
 
 
 function login() {

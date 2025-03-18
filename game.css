@@ -72,3 +72,30 @@
 #resultContainer button:hover {
   background-color:  #616ad0;;
 }
+
+.matchHistory{
+  background-color: #Adb1dc;
+  bottom: 900px; 
+  left: 10%;
+}
+
+.button2 {
+    
+  border: none;
+  color: #464545;
+  padding: 20px 40px; 
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px; 
+  margin: 4px 2px;
+  cursor: pointer;
+  position: fixed; 
+
+ 
+  transform: translateX(-50%); 
+  border-radius: 10px;
+
+
+}
+
