@@ -1,33 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>TicTacToe Game</title>
-<link rel="stylesheet" href="game.css" />
-<script src="api.js" defer></script>
+    <title>Multi TicTacToe Game</title>
+    <script src="api.js" defer></script>
+    <link rel="stylesheet" href="matchHistory.css" />
+
+    <style> </style>
 </head>
-
 <body>
-    <div id="resultContainer" style="display: none;">
-        <h2 id="resultMessage"></h2>
-        <p id="scoreDisplay"></p>
-    </div>
-    <h3>Match History</h3>
-    <button class="button matchHistory" id="matchHistory" onclick=""></button>
-    <div class="container">
-    <h1>Tic-Tac-Toe Feld</h1>
-    <div class="board">
-        <button  class="button  1" id="1" onclick="match(this.id)"></button>
-        <button  class="button  2" id="2" onclick="match(this.id)"></button>
-        <button  class="button  3" id="3" onclick="match(this.id)"></button>
-        <button  class="button  4" id="4" onclick="match(this.id)"></button>
-        <button  class="button  5" id="5" onclick="match(this.id)"></button>
-        <button  class="button  6" id="6" onclick="match(this.id)"></button>
-        <button  class="button  7" id="7" onclick="match(this.id)"></button>
-        <button  class="button  8" id="8" onclick="match(this.id)"></button>
-        <button  class="button  9" id="9" onclick="match(this.id)"></button>
 
-    </div>
-    </div>
+    <button class="button2 load" id="load" onclick="load()" >load</button>
+    
+        <div class="container" id="gameContainer"></div>
+    
+        <script>
+            function createTicTacToeBoards(numBoards) {
+                const container = document.getElementById("gameContainer");
+                for (let i = 0; i < numBoards; i++) {
+                    let board = document.createElement("div");
+                    board.classList.add("board");
+                    for (let j = 0; j < 9; j++) {
+                        let button = document.createElement("button");
+                        button.classList.add("button");
+                        button.id = `board${i + 1}-cell${j + 1}`;
+                        button.setAttribute("onclick", "match(this.id)");
+                        board.appendChild(button);
+                    }
+                    container.appendChild(board);
+                }
+            }
+            
+            createTicTacToeBoards(10);
+        </script>
+    
 </body>
-
 </html>

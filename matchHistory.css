@@ -1,0 +1,64 @@
+
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('img/backgroundgif.gif') no-repeat center center fixed;
+    background-size: cover; 
+    height: 100vh;
+    background-color: white;
+    flex-direction: column;
+}
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    max-width: 90%;
+}
+.board {
+    display: grid;
+    grid-template-columns: repeat(3, 30px);
+    grid-template-rows: repeat(3, 30px);
+    
+    gap: 3px;
+    padding: 10px;
+    background-color: none;
+}
+.button {
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    text-align: center;
+    background: none;
+    border: outset rgb(255, 234, 180); 
+    color: white; 
+    background-color: rgb(255, 234, 180); 
+}
+
+.load{
+    background-color: #Adb1dc;
+    bottom: 900px; 
+    left: 10%;
+}
+.button2 {
+    
+    border: none;
+    color: #464545;
+    padding: 20px 40px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px; 
+    margin: 4px 2px;
+    cursor: pointer;
+    position: fixed; 
+
+   
+    transform: translateX(-50%); 
+    border-radius: 10px;
+
+
+}

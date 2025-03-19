@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("creatAccount").addEventListener("click", creatAccount);
     document.getElementById("loginpage").addEventListener("click", loginpage)
     document.getElementById("matchHistory").addEventListener("click", matchHistoryload);
+    document.getElementById("load").addEventListener("click", load);
     for (let i = 1; i <= 9; i++) {
         document.getElementById(i).addEventListener("click", function () {
             match(i); 
@@ -19,9 +20,11 @@ function loginpage(){
     window.location.href = 'init.html';
 }
 function matchHistoryload(){
-    window.location.href = 'matchHistory.html';
-}
 
+    window.location.href = 'matchHistory.html';
+    
+    
+}
 
 function login() {
     const playerName = document.getElementById('playerName').value;
@@ -211,9 +214,32 @@ if (computerButton) {
 }
 
 
-function showresult() {
+function load(){
+    console.log("LocalStorage direkt nach Laden der Seite:", localStorage.getItem("playerId"));
+    const playerId = localStorage.getItem('playerId');
 
+
+    if (!playerId) {
+        alert("Es ist ein Fehler aufgetreten. Die playerId ist nicht verfügbar.");
+        return;
+    }
+    
+    fetch('http://localhost:8000/api/matchHistory', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+            
+        },
+        body: JSON.stringify({"playerId": playerId})
+
+    })
+    .then(response => response.json())
+
+    .then(data => {
+
+        console.log("Serverantwort:", data);
+
+    });
 
 
 }
-
