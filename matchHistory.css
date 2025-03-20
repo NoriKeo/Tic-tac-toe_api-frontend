@@ -18,18 +18,23 @@ body {
     justify-content: center;
     max-width: 90%;
 }
-.board {
+.board0, .board1, .board2, .board3, .board4, 
+.board5, .board6, .board7, .board8, .board9 {
     display: grid;
-    grid-template-columns: repeat(3, 30px);
-    grid-template-rows: repeat(3, 30px);
+    grid-template-columns: repeat(3, 70px);
+    grid-template-rows: repeat(3, 70px);
     
     gap: 3px;
     padding: 10px;
     background-color: none;
 }
-.button {
-    width: 30px;
-    height: 30px;
+
+
+
+
+.button{
+    width: 70px;
+    height: 70px;
     font-size: 14px;
     text-align: center;
     background: none;

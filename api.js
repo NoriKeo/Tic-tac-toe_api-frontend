@@ -29,7 +29,8 @@ function matchHistoryload(){
 function login() {
     const playerName = document.getElementById('playerName').value;
     const password = document.getElementById('password').value;
-
+    document.getElementById("error-message").style.display = "none"; 
+    document.getElementById("server-error").style.display = "none";
     fetch('http://localhost:8000/api/login', {
         method: 'POST',
         headers: {
@@ -44,12 +45,15 @@ function login() {
                 localStorage.setItem('playerId', data.playerId.toString());
                 window.location.href = 'game.html';
             } else {
-                alert('Login fehlgeschlagen! Ungültige Antwort vom Server.');
+                document.getElementById("error-message").style.display = "block";
+
+                //alert('Login fehlgeschlagen! Ungültige Antwort vom Server.');
             }
         })
         .catch(error => {
             console.error('Fehler:', error);
-            alert('Es gab ein Problem mit der Anmeldung.');
+            document.getElementById("server-error").style.display = "block";
+
         });
 }
 
@@ -237,9 +241,81 @@ function load(){
 
     .then(data => {
 
-        console.log("Serverantwort:", data);
+        
+
+        const updateBoard = (boardClass, playerMoves, computerMoves) => {
+            const board = document.querySelector(boardClass);
+            if (!board) return;
+        
+            playerMoves.forEach(id => {
+                const button = board.querySelector(`button[id='${id}']`);
+                if (button) {
+                    button.style.backgroundImage = "url('./img/player.png')";
+                    button.style.backgroundSize = "cover";
+                    button.style.backgroundPosition = "center";
+                    button.disabled = true;
+                }
+            });
+        
+            computerMoves.forEach(id => {
+                const button = board.querySelector(`button[id='${id}']`);
+                if (button) {
+                    button.style.backgroundImage = "url('img/computer2.0.png')";
+                    button.style.backgroundSize = "cover";
+                    button.style.backgroundPosition = "center";
+                    button.disabled = true;
+                }
+            });
+        };
+        
+        
+        for (let i = 0; i <= 10; i++) {
+            updateBoard(`.board${i}`, data[`playerMoves${i + 1}`], data[`computerMoves${i + 1}`]);
+        }
+        
+        
+        
+        
+
+        
+    
 
     });
 
 
 }
+
+function setLocalStorageWithExpiry(key, value, expiryInSeconds) {
+    const now = new Date();
+    const item = {
+        value: value,
+        expiry: now.getTime() + expiryInSeconds * 1000, 
+    };
+    localStorage.setItem(key, JSON.stringify(item));
+}
+
+function checkLocalStorageExpiry(key) {
+    const itemStr = localStorage.getItem(key);
+    if (!itemStr) {
+        return null;
+    }
+    const item = JSON.parse(itemStr);
+    const now = new Date();
+    
+    
+    if (now.getTime() > item.expiry) {
+        localStorage.removeItem(key);
+        window.location.href = "init.html";
+    }
+}
+
+setLocalStorageWithExpiry("sessionData", "your_value", 7200000);
+
+window.onload = function() {
+    checkLocalStorageExpiry("sessionData");
+};
+
+
+setInterval(() => {
+    checkLocalStorageExpiry("sessionData");
+}, 10000); 
