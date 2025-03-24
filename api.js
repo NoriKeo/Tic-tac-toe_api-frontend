@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("loginpage").addEventListener("click", loginpage)
     document.getElementById("matchHistory").addEventListener("click", matchHistoryload);
     document.getElementById("load").addEventListener("click", load);
+    //document.getElementById("newPasswort").addEventListener("click", newPasswort);
+
 
 
     for (let i = 1; i <= 9; i++) {
@@ -345,4 +347,36 @@ function showErrorMessage(errorMessage, errorCode) {
     const errorElement = document.getElementById("error-message");
     errorElement.innerText = errorMessage;
     errorElement.style.display = "block";
+}
+
+function newPasswort(){
+    const playerName = document.getElementById('playerName').value;
+    const password = document.getElementById('password').value;
+    const securityAnswer = document.getElementById('securityAnswer').value;
+
+    fetch('http://localhost:8000/api/newPassword', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ playerName, password, securityAnswer })
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (typeof data.playerId === "number") {
+                console.log('Account erstellen erfolgreich! Player ID:', data.playerId);
+                localStorage.setItem('playerId', data.playerId.toString());
+
+                console.log(localStorage.getItem('playerId'));
+                window.location.href = 'game.html';
+
+
+            } else {
+                alert('Account erstellen fehlgeschlagen! Ungültige Antwort vom Server.');
+            }
+        })
+        .catch(error => {
+            //errorHandler(error)
+            alert('Es gab ein Problem mit der Account erstellung.');
+        });
 }

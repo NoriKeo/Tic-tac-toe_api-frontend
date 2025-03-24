@@ -53,7 +53,7 @@
       background-color: #ecd59f;}
   .button1 {
     background-color: #Adb1dc;
-    bottom: 300px; 
+    bottom: 280px; 
     left: 50%;
     }
 
@@ -69,4 +69,15 @@
 
 
     }
-   
+    #forgot-password {
+      font-size: 14px;
+      color: blue;
+      text-decoration: underline;
+      bottom: 370px;
+      display: inline-block;
+    margin: 4px 2px;
+    cursor: pointer;
+    position: fixed; 
+    left: 50%;
+    transform: translateX(-50%); 
+  }

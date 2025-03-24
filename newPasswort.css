@@ -1,0 +1,86 @@
+.button {
+    
+    border: none;
+    color: #464545;
+    padding: 20px 40px; 
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px; 
+    margin: 4px 2px;
+    cursor: pointer;
+    position: fixed; 
+    transform: translateX(-50%); 
+    border-radius: 10px;
+
+
+}
+
+
+
+body {
+text-align: center;
+font-family: "Sour Gummy", sans-serif;
+background: url('img/backgroundgif.gif') no-repeat center center fixed;
+background-size: cover; 
+
+}
+
+
+
+
+.input {
+
+border: none;
+color: #464545;
+padding: 20px 40px; 
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 20px; 
+margin: 4px 2px;
+cursor: pointer;
+position: fixed; 
+left: 50%;
+transform: translateX(-50%); 
+border-radius: 10px;
+background-color: #ecd59f;
+
+
+
+}
+.question{
+border: none;
+color: #464545;
+padding: 20px 40px; 
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 25px; 
+margin: 4px 2px;
+cursor: pointer;
+position: fixed; 
+bottom: 600px;
+left: 50%;
+transform: translateX(-50%); 
+border-radius: 10px;
+
+
+}
+
+.input1 {bottom: 700px;}
+.input2 {bottom: 400px;}
+.input3 {bottom: 500px;}
+.newPasswort {
+background-color: #Adb1dc;
+bottom: 300px; 
+left: 50%;
+}
+
+.loginpage{
+  background-color: #Adb1dc;
+  bottom: 900px; 
+  left: 10%;
+}
+
+
