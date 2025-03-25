@@ -47,14 +47,18 @@ function login() {
                 localStorage.setItem('playerId', data.playerId.toString());
                 window.location.href = 'game.html';
             } else {
-                document.getElementById("error-message").style.display = "block";
+                
+                handleErrorMessages("login error","Username or password is incorrect.")
+                //document.getElementById("error-message").style.display = "block";
 
                 //alert('Login fehlgeschlagen! Ungültige Antwort vom Server.');
             }
         })
         .catch(error => {
+            
+            handleErrorMessages("server error","no response from server")
             console.error('Fehler:', error);
-            document.getElementById("server-error").style.display = "block";
+            //document.getElementById("server-error").style.display = "block";
 
         });
 }
@@ -87,14 +91,16 @@ function creatAccount(){
                 console.log(localStorage.getItem('playerId'));
                 window.location.href = 'game.html';
 
-            
             } else {
-                alert('Account erstellen fehlgeschlagen! Ungültige Antwort vom Server.');
+                 
+                 handleErrorMessages("login error", "Failed to create an account!");
+                //alert('Account erstellen fehlgeschlagen! Ungültige Antwort vom Server.');
             }
         })
         .catch(error => {
+             handleErrorMessages("Server errror","no response from server");
             console.error('Fehler:', error);
-            alert('Es gab ein Problem mit der Account erstellung.');
+            //alert('Es gab ein Problem mit der Account erstellung.');
         });
 
 }
@@ -106,7 +112,9 @@ function match(clicked_id) {
 
 
     if (!playerId) {
-        alert("Es ist ein Fehler aufgetreten. Die playerId ist nicht verfügbar.");
+        handleErrorMessages("data problem","no playerid available");
+
+        //alert("Es ist ein Fehler aufgetreten. Die playerId ist nicht verfügbar.");
         return;
     }
     const move = parseInt(clicked_id); 
@@ -138,9 +146,15 @@ if (playerPosition && playerPosition.length > 0) {
             console.log("Spielerfeld gefärbt:", id);
         }
     });
+} else{
+    handleErrorMessages("incorrect entry","select a free field");
 }
 
 let computerPlays = data.computerPlays;
+if(computerPlays <= 0){
+    handleErrorMessages("Server error","no computer response");
+    alert("computer problemmmmi")
+}
 if (computerPlays && computerPlays.length > 0) {
     computerPlays.forEach(id => {
         let button = document.getElementById(id);
@@ -151,6 +165,7 @@ if (computerPlays && computerPlays.length > 0) {
             console.log("Computerfeld gefärbt:", id);
         }
     });
+}else{
 }
 
 
@@ -191,12 +206,10 @@ if (data.winner > 0) {
     });
 
     document.getElementById('resultContainer').style.display = 'block'; // Sichtbar machen
-} else {
-    console.log('Kein Ergebnis gefunden.');
-}
+} 
 
 
-const playerButton = document.getElementById(data.move);
+/*const playerButton = document.getElementById(data.move);
 const computerButton = document.getElementById(data.computerMove);
 
 
@@ -211,10 +224,11 @@ if (computerButton) {
     computerButton.style.backgroundImage = "url('img/computer2.0.png')";
     computerButton.style.backgroundSize = "cover";
     computerButton.style.backgroundPosition = "center";
-}
+} */
 
     })
     .catch(error => {
+        handleErrorMessages("server error","no response from server" );
         console.error('Fehler bei der Anfrage:', error);
     });
 }
@@ -226,7 +240,8 @@ function load(){
 
 
     if (!playerId) {
-        alert("Es ist ein Fehler aufgetreten. Die playerId ist nicht verfügbar.");
+        handleErrorMessages("data problem","no playerid available");
+        //("Es ist ein Fehler aufgetreten. Die playerId ist nicht verfügbar.");
         return;
     }
     
@@ -346,12 +361,37 @@ function newPasswort(){
             localStorage.setItem('playerId', data.playerId.toString());
             window.location.href = 'game.html';
         } else {
-            alert('Passwortänderung fehlgeschlagen! Falsche Sicherheitsantwort oder Benutzername.');
+            handleErrorMessages("Login error","Wrong answer or username.")
+            //alert('Passwortänderung fehlgeschlagen! Falsche Sicherheitsantwort oder Benutzername.');
         }
     })
     .catch(error => {
         console.error('Fehler:', error);
-        alert('Es gab ein Problem mit der Passwortänderung.');
+        handleErrorMessages("Server error","no response from server")
+        //('Es gab ein Problem mit der Passwortänderung.');
     });
 }
 
+function handleErrorMessages(errorType, message) {
+    let errorContainer = document.getElementById("error-container");
+    if (!errorContainer) {
+        errorContainer = document.createElement("div");
+        errorContainer.id = "error-container";
+        errorContainer.style.position = "fixed";
+        errorContainer.style.top = "10px";
+        errorContainer.style.right = "10px";
+        errorContainer.style.backgroundColor = "rgba(255, 0, 0, 0.8)";
+        errorContainer.style.color = "white";
+        errorContainer.style.padding = "10px";
+        errorContainer.style.borderRadius = "5px";
+        errorContainer.style.zIndex = "1000";
+        document.body.appendChild(errorContainer);
+    }
+    
+    errorContainer.innerHTML = `<strong>${errorType}:</strong> ${message}`;
+    errorContainer.style.display = "block";
+    
+    setTimeout(() => {
+        errorContainer.style.display = "none";
+    }, 5000);
+}
