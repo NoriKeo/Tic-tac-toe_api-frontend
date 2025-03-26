@@ -1,7 +1,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
-    document.getElementById("login").addEventListener("click", login);
-    document.getElementById("creat").addEventListener("click", creat); 
+    //document.getElementById("login").addEventListener("click", login);
+    //document.getElementById("creat").addEventListener("click", creat); 
     document.getElementById("newGame").addEventListener("click", newGame);
     document.getElementById("creatAccount").addEventListener("click", creatAccount);
     document.getElementById("loginpage").addEventListener("click", loginpage)
@@ -151,11 +151,11 @@ if (playerPosition && playerPosition.length > 0) {
 }
 
 let computerPlays = data.computerPlays;
-if(computerPlays <= 0){
-    handleErrorMessages("Server error","no computer response");
-    alert("computer problemmmmi")
-}
-if (computerPlays && computerPlays.length > 0) {
+
+
+alert(computerPlays);
+    
+if(computerPlays.length != 0 ) {
     computerPlays.forEach(id => {
         let button = document.getElementById(id);
         if (button) {
@@ -166,8 +166,9 @@ if (computerPlays && computerPlays.length > 0) {
         }
     });
 }else{
+    handleErrorMessages("Server error", "no computer response");
+    alert("computer problem");
 }
-
 
 if (data.winner > 0) {
     localStorage.setItem('win', data.winner);
