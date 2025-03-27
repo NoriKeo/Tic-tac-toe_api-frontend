@@ -1,83 +1,97 @@
 .button {
     
-        border: none;
-        color: #464545;
-        padding: 20px 40px; 
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 20px; 
-        margin: 4px 2px;
-        cursor: pointer;
-        position: fixed; 
+  border: none;
+  color: #464545;
+  padding: 20px 40px; 
 
-       
-        transform: translateX(-50%); 
-        border-radius: 10px;
-    
-    
-  }
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px; 
+  margin: 4px 2px;
+  cursor: pointer;
+  position: fixed; 
+  font-family: "Sour Gummy", sans-serif;
 
-  body {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    background: url('img/backgroundgif.gif') no-repeat center center fixed;
-    background-size: cover; 
-    
-}
-
-
-  .input {
-
-    border: none;
-    color: #464545;
-    padding: 20px 40px; 
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 20px; 
-    margin: 4px 2px;
-    cursor: pointer;
-    position: fixed; 
-    left: 50%;
-    transform: translateX(-50%); 
-    border-radius: 10px;
-
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+ 
+  transform: translateX(-50%); 
+  border-radius: 10px;
 
 
 }
 
-    .input1 {bottom: 500px;
-    background-color: #ecd59f;}
-    .input2 {bottom: 400px;
-      background-color: #ecd59f;}
-  .button1 {
-    background-color: #Adb1dc;
-    bottom: 300px; 
-    left: 50%;
-    }
+body {
+text-align: center;
+font-family: "Sour Gummy", sans-serif;
+background: url('img/backgroundgif.gif') no-repeat center center fixed;
+background-size: cover; 
 
-    .button2{
-        background-color: #Adb1dc;
-        bottom: 900px; 
-        left: 10%;
-    }
-    h3{
-      color: #464545;
-      font-size: 40px; 
-      bottom: 900px; 
+}
 
 
-    }
-    #forgot-password {
-      font-size: 14px;
-      color: blue;
-      text-decoration: underline;
-      bottom: 370px;
-      display: inline-block;
-    margin: 4px 2px;
-    cursor: pointer;
-    position: fixed; 
-    left: 50%;
-    transform: translateX(-50%); 
-  }
+.input {
+  font-family: "Sour Gummy", sans-serif;
+
+border: none;
+color: #464545;
+padding: 20px 40px; 
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 20px; 
+margin: 4px 2px;
+cursor: pointer;
+position: fixed; 
+left: 50%;
+transform: translateX(-50%); 
+border-radius: 10px;
+box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+
+
+
+}
+
+.input1 {bottom: 500px;
+background-color: #ecd59f;}
+.input2 {bottom: 400px;
+background-color: #ecd59f;}
+.button1 {
+background-color: #Adb1dc;
+bottom: 300px; 
+left: 50%;
+}
+
+.button2{
+  background-color: #Adb1dc;
+  bottom: 900px; 
+  left: 10%;
+}
+h3{
+color: #464545;
+font-size: 40px; 
+bottom: 900px; 
+
+
+}
+#forgot-password {
+font-size: 14px;
+color: blue;
+text-decoration: underline;
+bottom: 370px;
+display: inline-block;
+margin: 4px 2px;
+cursor: pointer;
+position: fixed; 
+left: 50%;
+transform: translateX(-50%); 
+} 
+.button:hover {
+  background-color: #6399fd;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.button:active {
+  background-color: #6399fd;
+}

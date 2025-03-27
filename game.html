@@ -3,6 +3,10 @@
 <head>
 <title>TicTacToe Game</title>
 <link rel="stylesheet" href="game.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
 <script src="api.js" defer></script>
 </head>
 
@@ -14,7 +18,7 @@
 
     <button class="button2 matchHistory" id="matchHistory" onclick="matchHistoryload()">matchHistory</button>
     <div class="container">
-    <h1>Tic-Tac-Toe Feld</h1>
+    <h1 id="title">Tic-Tac-Toe</h1>
     <div class="board">
         <button  class="button  1" id="1" onclick="match(this.id)"></button>
         <button  class="button  2" id="2" onclick="match(this.id)"></button>

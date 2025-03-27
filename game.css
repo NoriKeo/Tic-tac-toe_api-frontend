@@ -3,7 +3,7 @@
       
     body {
       text-align: center;
-      font-family: Arial, sans-serif;
+      font-family: "Sour Gummy", sans-serif;
       background: url('img/backgroundgif.gif') no-repeat center center fixed;
       background-size: cover; 
       height: 100vh; 
@@ -29,6 +29,8 @@
   }
   
   .button {
+    font-family: "Sour Gummy", sans-serif;
+
     width: 200px;
     height: 200px;
     border: outset rgb(255, 234, 180); 
@@ -38,15 +40,26 @@
     font-size: 24px; 
     cursor: pointer; 
     transition: background-color 0.3s ease; 
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+
 }
 
 .button:hover {
-    background-color: rgb(255, 234, 180);
+    background-color: #e4d1a0;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+
 }
+
+.button2:active {
+  background-color: #e4d1a0;
+}
+
 
     
 #resultContainer {
   position: absolute;
+  font-family: "Sour Gummy", sans-serif;
+
   top: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -60,6 +73,7 @@
 
 #resultContainer button {
   margin-top: 20px;
+  font-family: "Sour Gummy", sans-serif;
   padding: 10px 20px;
   font-size: 16px;
     background-color: #Adb1dc;
@@ -74,13 +88,15 @@
 }
 
 .matchHistory{
+  font-family: "Sour Gummy", sans-serif;
+
   background-color: #Adb1dc;
   bottom: 900px; 
   left: 10%;
 }
 
 .button2 {
-    
+
   border: none;
   color: #464545;
   padding: 20px 40px; 
@@ -91,11 +107,19 @@
   margin: 4px 2px;
   cursor: pointer;
   position: fixed; 
-
- 
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+  font-family: "Sour Gummy", sans-serif;
   transform: translateX(-50%); 
   border-radius: 10px;
 
 
+}
+.button2:hover {
+  background-color: #6399fd;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.button2:active {
+  background-color: #6399fd;
 }
 

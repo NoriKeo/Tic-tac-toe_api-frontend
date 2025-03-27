@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("loginpage").addEventListener("click", loginpage)
     document.getElementById("matchHistory").addEventListener("click", matchHistoryload);
     document.getElementById("load").addEventListener("click", load);
-    //document.getElementById("newPasswort").addEventListener("click", newPasswort);
+    document.getElementById("newPasswort").addEventListener("click", newPasswort);
     for (let i = 1; i <= 9; i++) {
         document.getElementById(i).addEventListener("click", function () {
             match(i); 
@@ -31,8 +31,6 @@ function login() {
     //alert("hallo");
     const playerName = document.getElementById('playerName').value;
     const password = document.getElementById('password').value;
-    document.getElementById("error-message").style.display = "none"; 
-    document.getElementById("server-error").style.display = "none";
     fetch('http://localhost:8000/api/login', {
         method: 'POST',
         headers: {
@@ -205,8 +203,11 @@ if (data.winner > 0) {
     buttons.forEach(button => {
         button.disabled = true; 
     });
+    document.getElementById('resultContainer').style.fontFamily =  'Sour Gummy, sans-serif';
 
-    document.getElementById('resultContainer').style.display = 'block'; // Sichtbar machen
+    document.getElementById('resultContainer').style.display = 'block'; 
+    document.getElementById('title').style.display = 'none';
+
 } 
 
 
@@ -363,13 +364,11 @@ function newPasswort(){
             window.location.href = 'game.html';
         } else {
             handleErrorMessages("Login error","Wrong answer or username.")
-            //alert('Passwortänderung fehlgeschlagen! Falsche Sicherheitsantwort oder Benutzername.');
         }
     })
     .catch(error => {
         console.error('Fehler:', error);
         handleErrorMessages("Server error","no response from server")
-        //('Es gab ein Problem mit der Passwortänderung.');
     });
 }
 

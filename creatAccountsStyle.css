@@ -3,6 +3,8 @@
         border: none;
         color: #464545;
         padding: 20px 40px; 
+        font-family: "Sour Gummy", sans-serif;
+
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -12,6 +14,8 @@
         position: fixed; 
         transform: translateX(-50%); 
         border-radius: 10px;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+
     
     
   }
@@ -30,6 +34,7 @@
 
 
   .input {
+    font-family: "Sour Gummy", sans-serif;
 
     border: none;
     color: #464545;
@@ -45,6 +50,7 @@
     transform: translateX(-50%); 
     border-radius: 10px;
     background-color: #ecd59f;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 
 
 
@@ -66,6 +72,7 @@
   border-radius: 10px;
 
 
+
 }
 
     .input1 {bottom: 700px;}
@@ -81,6 +88,14 @@
       background-color: #Adb1dc;
       bottom: 900px; 
       left: 10%;
+  }
+  .button:hover {
+    background-color: #6399fd;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .button:active {
+    background-color: #6399fd;
   }
 
     

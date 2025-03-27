@@ -41,15 +41,22 @@ body {
     border: outset rgb(255, 234, 180); 
     color: white; 
     background-color: rgb(255, 234, 180); 
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+
 }
 
 .load{
     background-color: #Adb1dc;
     bottom: 900px; 
-    left: 10%;
+    left: 9%;
+
+}
+.newGame{
+    background-color: #Adb1dc;
+    bottom: 830px; 
+    left: 9%;
 }
 .button2 {
-    
     border: none;
     color: #464545;
     padding: 20px 40px; 
@@ -61,9 +68,23 @@ body {
     cursor: pointer;
     position: fixed; 
 
-   
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+
     transform: translateX(-50%); 
     border-radius: 10px;
 
 
+}
+
+
+.button2:hover {
+    background-color: #365A9B;
+    transform: translateY(-1.5px);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.button2:active {
+    background-color: #2C4A81;
+    transform: scale(0.20);
 }
