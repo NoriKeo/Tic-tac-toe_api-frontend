@@ -95,3 +95,10 @@ transform: translateX(-50%);
 .button:active {
   background-color: #6399fd;
 }
+
+@media screen and (max-width: 768px) {
+  .button, .input {
+      padding: 12px 20px;
+      font-size: 16px;
+  }
+}

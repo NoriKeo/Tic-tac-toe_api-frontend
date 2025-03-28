@@ -123,3 +123,13 @@
   background-color: #6399fd;
 }
 
+@media screen and (max-width: 768px) {
+  .board {
+      grid-template-columns: repeat(3, 1fr);
+      width: 100%;
+      max-width: 90%;
+  }
+  .button {
+      font-size: 18px;
+  }
+}
