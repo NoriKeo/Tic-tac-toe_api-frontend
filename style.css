@@ -10,7 +10,6 @@
   font-size: 20px; 
   margin: 4px 2px;
   cursor: pointer;
-  position: fixed; 
   font-family: "Sour Gummy", sans-serif;
 
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
@@ -61,12 +60,15 @@ background-color: #ecd59f;}
 background-color: #Adb1dc;
 bottom: 300px; 
 left: 50%;
+position: fixed; 
+
 }
 
 .button2{
   background-color: #Adb1dc;
-  bottom: 900px; 
-  left: 10%;
+  position: relative; 
+  left: -35%;
+  bottom: 50px;
 }
 h3{
 color: #464545;
