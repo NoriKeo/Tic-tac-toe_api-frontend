@@ -7,6 +7,8 @@ body {
     align-items: center;
     background: url('img/backgroundgif.gif') no-repeat center center fixed;
     background-size: cover; 
+    font-family: "Sour Gummy", sans-serif;
+
     height: 100vh;
     background-color: white;
     flex-direction: column;
@@ -40,6 +42,8 @@ body {
     background: none;
     border: outset rgb(255, 234, 180); 
     color: white; 
+    font-family: "Sour Gummy", sans-serif;
+
     background-color: rgb(255, 234, 180); 
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
 
@@ -67,6 +71,7 @@ body {
     margin: 4px 2px;
     cursor: pointer;
     position: fixed; 
+    font-family: "Sour Gummy", sans-serif;
 
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
     cursor: pointer;
@@ -79,12 +84,48 @@ body {
 
 
 .button2:hover {
-    background-color: #365A9B;
-    transform: translateY(-1.5px);
+    background-color: #6399fd;
     box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .button2:active {
-    background-color: #2C4A81;
-    transform: scale(0.20);
+    background-color: #6399fd;
+}
+.form-container {
+    font-family: "Sour Gummy", sans-serif;
+
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #Adb1dc;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+
+    border-radius: 8px;
+}
+.form-container label {
+    margin-right: 10px;
+    background-color: #Adb1dc;
+    
+
+}
+.form-container input, .form-container button {
+    background-color: #Adb1dc;
+    font-family: "Sour Gummy", sans-serif;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    border: none;
+    color: #464545;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 5px;
+}
+
+
+.form-container button:hover {
+    background-color: #6399fd;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+.form-container input:hover{
+    background-color:#6399fd;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
 }

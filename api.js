@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("loginpage").addEventListener("click", loginpage)
     document.getElementById("matchHistory").addEventListener("click", matchHistoryload);
     document.getElementById("load").addEventListener("click", load);
+    document.getElementById("resetFilter").addEventListener("click",resetFilter);
     document.getElementById("newPasswort").addEventListener("click", newPasswort);
     for (let i = 1; i <= 9; i++) {
         document.getElementById(i).addEventListener("click", function () {
@@ -236,14 +237,12 @@ if (computerButton) {
 }
 
 
-function load(){
+function load() {
     console.log("LocalStorage direkt nach Laden der Seite:", localStorage.getItem("playerId"));
     const playerId = localStorage.getItem('playerId');
 
-
     if (!playerId) {
-        handleErrorMessages("data problem","no playerid available");
-        //("Es ist ein Fehler aufgetreten. Die playerId ist nicht verfügbar.");
+        handleErrorMessages("data problem", "no playerid available");
         return;
     }
     
@@ -251,21 +250,22 @@ function load(){
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-            
         },
-        body: JSON.stringify({"playerId": playerId})
-
+        body: JSON.stringify({ "playerId": playerId })
     })
     .then(response => response.json())
-
     .then(data => {
-
+        if (!Array.isArray(data) || data.length === 0) {
+            console.log("Keine Match-Daten vorhanden.");
+            return;
+        }
         
+        const randomMatches = data.sort(() => 0.5 - Math.random()).slice(0, 10);
 
         const updateBoard = (boardClass, playerMoves, computerMoves) => {
             const board = document.querySelector(boardClass);
             if (!board) return;
-        
+    
             playerMoves.forEach(id => {
                 const button = board.querySelector(`button[id='${id}']`);
                 if (button) {
@@ -275,7 +275,7 @@ function load(){
                     button.disabled = true;
                 }
             });
-        
+    
             computerMoves.forEach(id => {
                 const button = board.querySelector(`button[id='${id}']`);
                 if (button) {
@@ -286,23 +286,35 @@ function load(){
                 }
             });
         };
-        
-        
-        for (let i = 0; i <= 10; i++) {
-            updateBoard(`.board${i}`, data[`playerMoves${i + 1}`], data[`computerMoves${i + 1}`]);
-        }
-        
-        
-        
-        
-
-        
     
-
-    });
-
-
+        randomMatches.forEach((match, index) => {
+            updateBoard(`.board${index}`, match.playerMoves, match.computerMoves);
+        });
+    })
+    .catch(error => console.error("Fehler beim Laden der Match-Historie:", error));
 }
+
+ function filterMatches() {
+            let startdata = document.getElementById("dateFilter").value;
+            let enddata = document.getElementById("dateFilter2").value;
+
+            let result = document.querySelector('input[name="result"]:checked')?.value;
+
+            console.log(startdata);
+            console.log(enddata);
+            console.log(result);
+ }
+           
+
+window.resetFilter = function() {
+    document.getElementById("dateFilter").value = "";
+    document.getElementById("dateFilter2").value = "";
+    let selectedRadio = document.querySelector('input[name="result"]:checked');
+    if (selectedRadio) {
+        selectedRadio.checked = false;
+    }
+    console.log("Filter zurückgesetzt");
+};
 
 function setLocalStorageWithExpiry(key, value, expiryInSeconds) {
     const now = new Date();

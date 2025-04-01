@@ -1,44 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Multi TicTacToe Game</title>
     <script src="api.js" defer></script>
     <link rel="stylesheet" href="matchHistory.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <style> </style>
+   
 </head>
 <body>
+    <div class="form-container">
+        <h3>Match Filter</h3>
+
+        <label for="dateFilter">Select a start date:</label>
+        <input type="date" id="dateFilter" name="dateFilter"><br><br>
+        <label for="dateFilter">Select an end date:</label>
+        <input type="date" id="dateFilter2" name="dateFilter2"><br><br>
+
+
+
+        <label for="result">Select result:</label><br>
+        <input type="radio" id="win" name="result" value=1 >
+        <label for="won">won</label><br>
+        <input type="radio" id="lost" name="result" value=2>
+        <label for="lost">lost</label><br><br>
+        <input type="radio" id="draw" name="result" value=3>
+        <label for="lost">draw</label><br><br>
+
+        <button type="button" id="filterMatches" onclick="filterMatches()">Use filter</button>
+        <button type="button" id="resetFilter" onclick="resetFilter()">Reset filter</button>
+    </div>
 
     <button class="button2 load" id="load" onclick="load()">load Games</button>
     <button class="button2 newGame" id="newGame" onclick="newGame()">new Games</button>
 
-    
-        <div class="container" id="gameContainer"></div>
-    
-        <script>
-            function createTicTacToeBoards(numBoards) {
-                const container = document.getElementById("gameContainer");
-                for (let i = 0; i < numBoards; i++) {
-                    let board = document.createElement("div");
-                    board.classList.add("board" + i);
-                    for (let j = 0; j < 9; j++) {
-                        let button = document.createElement("button");
-                        button.classList.add("button");
-                        button.id = `${j + 1}`;
-                        button.setAttribute("onclick", "match(this.id)");
-                        board.appendChild(button);
-                    }
-                    container.appendChild(board);
+    <div class="container" id="gameContainer"></div>
+
+    <script>
+        
+        function createTicTacToeBoards(numBoards) {
+            const container = document.getElementById("gameContainer");
+            for (let i = 0; i < numBoards; i++) {
+                let board = document.createElement("div");
+                board.classList.add("board" + i);
+                for (let j = 0; j < 9; j++) {
+                    let button = document.createElement("button");
+                    button.classList.add("button");
+                    button.id = `${j + 1}`;
+                    button.setAttribute("onclick", "match(this.id)");
+                    board.appendChild(button);
                 }
+                container.appendChild(board);
             }
-            
-            createTicTacToeBoards(10);
-        </script>
-    
+        }
+
+
+       
+
+        createTicTacToeBoards(10); 
+    </script>
+
 </body>
 </html>
