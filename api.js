@@ -295,14 +295,86 @@ function load() {
 }
 
  function filterMatches() {
-            let startdata = document.getElementById("dateFilter").value;
-            let enddata = document.getElementById("dateFilter2").value;
+    console.log("LocalStorage direkt nach Laden der Seite:", localStorage.getItem("playerId"));
+    const playerId = localStorage.getItem('playerId');
 
-            let result = document.querySelector('input[name="result"]:checked')?.value;
+    if (!playerId) {
+        handleErrorMessages("data problem", "no playerid available");
+        return;
+    }
+    
+    fetch('http://localhost:8000/api/matchHistory', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "playerId": playerId })
+    })
+    .then(response => response.json())
+    .then(data => {
 
-            console.log(startdata);
-            console.log(enddata);
-            console.log(result);
+    
+        let startdata = document.getElementById("dateFilter").value;
+        let enddata = document.getElementById("dateFilter2").value;
+        let result = document.querySelector('input[name="result"]:checked')?.value;
+    
+        if (!Array.isArray(data) || data.length === 0) {
+            console.log("Keine Match-Daten vorhanden.");
+            return;
+        }
+    
+        const filteredMatches = data.filter(match => {
+            const matchStart = new Date(match.started_at);
+            const matchEnd = match.ended_at ? new Date(match.ended_at) : null;
+            const startFilter = startdata ? new Date(startdata) : null;
+            const endFilter = enddata ? new Date(enddata) : null;
+
+            const isWithinDateRange = (!startFilter || matchStart >= startFilter) && (!endFilter || (matchEnd && matchEnd <= endFilter));
+            const isResultMatching = !result || match.verdict_id === parseInt(result);
+    
+            return isWithinDateRange && isResultMatching;
+        });
+        console.log("problem1");
+
+        const selectedMatches = filteredMatches.slice(0, 10);
+    
+        const updateBoard = (boardClass, playerMoves, computerMoves) => {
+            console.log("problem2");
+
+            const board = document.querySelector(boardClass);
+            if (!board) return;
+
+            playerMoves.forEach(id => {
+                const button = board.querySelector(`button[id='${id}']`);
+                if (button) {
+                    button.style.backgroundImage = "url('./img/player.png')";
+                    button.style.backgroundSize = "cover";
+                    button.style.backgroundPosition = "center";
+                    button.disabled = true;
+                }
+            });
+    
+            computerMoves.forEach(id => {
+                const button = board.querySelector(`button[id='${id}']`);
+                if (button) {
+                    button.style.backgroundImage = "url('img/computer2.0.png')";
+                    button.style.backgroundSize = "cover";
+                    button.style.backgroundPosition = "center";
+                    button.disabled = true;
+                }
+            });
+        };
+        console.log("problem3");
+
+        selectedMatches.forEach((match, index) => {
+            console.log("problem4");
+
+            updateBoard(`.board${index}`, match.playerMoves, match.computerMoves);
+            filterMatches("works","Filter hat funktioniert");
+        });
+    })
+    .catch(error => console.error("Fehler beim filter der Match-Historie:", error));
+    
  }
            
 
@@ -314,6 +386,7 @@ window.resetFilter = function() {
         selectedRadio.checked = false;
     }
     console.log("Filter zurückgesetzt");
+    load();
 };
 
 function setLocalStorageWithExpiry(key, value, expiryInSeconds) {
@@ -393,6 +466,30 @@ function handleErrorMessages(errorType, message) {
         errorContainer.style.top = "10px";
         errorContainer.style.right = "10px";
         errorContainer.style.backgroundColor = "rgba(255, 0, 0, 0.8)";
+        errorContainer.style.color = "white";
+        errorContainer.style.padding = "10px";
+        errorContainer.style.borderRadius = "5px";
+        errorContainer.style.zIndex = "1000";
+        document.body.appendChild(errorContainer);
+    }
+    
+    errorContainer.innerHTML = `<strong>${errorType}:</strong> ${message}`;
+    errorContainer.style.display = "block";
+    
+    setTimeout(() => {
+        errorContainer.style.display = "none";
+    }, 5000);
+}
+
+function filterMessages(errorType, message) {
+    let errorContainer = document.getElementById("error-container");
+    if (!errorContainer) {
+        errorContainer = document.createElement("div");
+        errorContainer.id = "error-container";
+        errorContainer.style.position = "fixed";
+        errorContainer.style.top = "10px";
+        errorContainer.style.right = "10px";
+        errorContainer.style.backgroundColor = "rgba(65, 255, 141, 0.8)";
         errorContainer.style.color = "white";
         errorContainer.style.padding = "10px";
         errorContainer.style.borderRadius = "5px";
