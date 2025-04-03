@@ -21,11 +21,13 @@ body {
     max-width: 90%;
 }
 .board0, .board1, .board2, .board3, .board4, 
-.board5, .board6, .board7, .board8, .board9 {
+.board5, .board6, .board7, .board8, .board9,.board10, .board11, .board12, .board13, .board14, 
+.board15, .board16, .board17, .board18, .board19 {
     display: grid;
     grid-template-columns: repeat(3, 70px);
     grid-template-rows: repeat(3, 70px);
-    
+    border-radius: 10px;
+
     gap: 3px;
     padding: 10px;
     background-color: none;
@@ -43,6 +45,7 @@ body {
     border: outset rgb(255, 234, 180); 
     color: white; 
     font-family: "Sour Gummy", sans-serif;
+    border-radius: 10px;
 
     background-color: rgb(255, 234, 180); 
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
@@ -69,7 +72,6 @@ body {
     display: inline-block;
     font-size: 20px; 
     margin: 4px 2px;
-    cursor: pointer;
     position: fixed; 
     font-family: "Sour Gummy", sans-serif;
 
@@ -93,8 +95,8 @@ body {
 }
 .form-container {
     font-family: "Sour Gummy", sans-serif;
-
-    margin-bottom: 20px;
+  
+    margin-bottom: 100px;
     padding: 10px;
     background-color: #Adb1dc;
     box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
@@ -118,6 +120,9 @@ body {
     text-decoration: none;
     display: inline-block;
     margin: 5px;
+    border-radius: 5px;
+
+    
 }
 
 

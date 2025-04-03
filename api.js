@@ -260,7 +260,7 @@ function load() {
             return;
         }
         
-        const randomMatches = data.sort(() => 0.5 - Math.random()).slice(0, 10);
+        const randomMatches = data.sort(() => 0.5 - Math.random()).slice(0, 12);
 
         const updateBoard = (boardClass, playerMoves, computerMoves) => {
             const board = document.querySelector(boardClass);
@@ -314,35 +314,40 @@ function load() {
     .then(data => {
 
     
+        
         let startdata = document.getElementById("dateFilter").value;
         let enddata = document.getElementById("dateFilter2").value;
         let result = document.querySelector('input[name="result"]:checked')?.value;
-    
-        if (!Array.isArray(data) || data.length === 0) {
-            console.log("Keine Match-Daten vorhanden.");
-            return;
-        }
-    
-        const filteredMatches = data.filter(match => {
-            const matchStart = new Date(match.started_at);
-            const matchEnd = match.ended_at ? new Date(match.ended_at) : null;
-            const startFilter = startdata ? new Date(startdata) : null;
-            const endFilter = enddata ? new Date(enddata) : null;
 
-            const isWithinDateRange = (!startFilter || matchStart >= startFilter) && (!endFilter || (matchEnd && matchEnd <= endFilter));
-            const isResultMatching = !result || match.verdict_id === parseInt(result);
-    
-            return isWithinDateRange && isResultMatching;
-        });
-        console.log("problem1");
+if (!Array.isArray(data) || data.length === 0) {
+    console.log("Keine Match-Daten vorhanden.");
+    return;
+}
 
-        const selectedMatches = filteredMatches.slice(0, 10);
+console.log(result);
+console.log(startdata)
+const filteredDataStart = data.filter(entry => entry.started_at.startsWith(startdata));
+const filteredDataEnd = data.filter(entry => entry.ended_at.startsWith(enddata));
+const filteredDataResult = data.filter(entry => entry.verdict_id === Number(result));
+
+const commonEntries = filteredDataStart.filter(entry =>
+    filteredDataEnd.some(e => e.id === entry.id) &&
+    filteredDataResult.some(e => e.id === entry.id)
+);
+
+console.log("commonEntries ",commonEntries);
+
+console.log("start ",filteredDataStart);
+console.log("end ",filteredDataEnd);
+console.log(" result ",filteredDataResult);
+
     
         const updateBoard = (boardClass, playerMoves, computerMoves) => {
-            console.log("problem2");
+            console.log("problem2.1");
 
             const board = document.querySelector(boardClass);
             if (!board) return;
+            console.log("problem2.1");
 
             playerMoves.forEach(id => {
                 const button = board.querySelector(`button[id='${id}']`);
@@ -364,18 +369,35 @@ function load() {
                 }
             });
         };
-        console.log("problem3");
-
-        selectedMatches.forEach((match, index) => {
-            console.log("problem4");
+       
+        commonEntries.forEach((match, index) => {
 
             updateBoard(`.board${index}`, match.playerMoves, match.computerMoves);
-            filterMatches("works","Filter hat funktioniert");
-        });
+        }); 
+        filterMessages("works","Filter worked");
+
+        
+        
     })
     .catch(error => console.error("Fehler beim filter der Match-Historie:", error));
     
  }
+
+ function createTicTacToeBoards(numBoards) {
+    const container = document.getElementById("gameContainer");
+    for (let i = 0; i < numBoards; i++) {
+        let board = document.createElement("div");
+        board.classList.add("board" + i);
+        for (let j = 0; j < 9; j++) {
+            let button = document.createElement("button");
+            button.classList.add("button");
+            button.id = `${j + 1}`;
+            button.setAttribute("onclick", "match(this.id)");
+            board.appendChild(button);
+        }
+        container.appendChild(board);
+    }
+}
            
 
 window.resetFilter = function() {
@@ -385,8 +407,8 @@ window.resetFilter = function() {
     if (selectedRadio) {
         selectedRadio.checked = false;
     }
-    console.log("Filter zurückgesetzt");
-    load();
+    console.log("Filter zurückgesetzt");    
+    filterMessages("resetFilter","filter has been reset ");
 };
 
 function setLocalStorageWithExpiry(key, value, expiryInSeconds) {
