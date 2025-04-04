@@ -1,23 +1,19 @@
+window.matchHistoryData = null;
+
 document.addEventListener("DOMContentLoaded", function () {
-    
     document.getElementById("newGame").addEventListener("click", newGame);
     document.getElementById("matchHistory").addEventListener("click", matchHistoryload);
     document.getElementById("load").addEventListener("click", load);
-    document.getElementById("resetFilter").addEventListener("click",resetFilter);
-    console.log("LocalStorage nach Laden der Seite:", localStorage.getItem("playerId"));
-});
+    document.getElementById("resetFilter").addEventListener("click", resetFilter);
 
-
-
-function load() {
-    console.log("LocalStorage direkt nach Laden der Seite:", localStorage.getItem("playerId"));
     const playerId = localStorage.getItem('playerId');
+    console.log("LocalStorage nach Laden der Seite:", playerId);
 
     if (!playerId) {
         handleErrorMessages("data problem", "no playerid available");
         return;
     }
-    
+
     fetch('http://localhost:8000/api/matchHistory', {
         method: 'POST',
         headers: {
@@ -31,146 +27,108 @@ function load() {
             console.log("Keine Match-Daten vorhanden.");
             return;
         }
-        
-        const randomMatches = data.sort(() => 0.5 - Math.random()).slice(0, 12);
-
-        const updateBoard = (boardClass, playerMoves, computerMoves) => {
-            const board = document.querySelector(boardClass);
-            if (!board) return;
-    
-            playerMoves.forEach(id => {
-                const button = board.querySelector(`button[id='${id}']`);
-                if (button) {
-                    button.style.backgroundImage = "url('./img/player.png')";
-                    button.style.backgroundSize = "cover";
-                    button.style.backgroundPosition = "center";
-                    button.disabled = true;
-                }
-            });
-    
-            computerMoves.forEach(id => {
-                const button = board.querySelector(`button[id='${id}']`);
-                if (button) {
-                    button.style.backgroundImage = "url('img/computer2.0.png')";
-                    button.style.backgroundSize = "cover";
-                    button.style.backgroundPosition = "center";
-                    button.disabled = true;
-                }
-            });
-        };
-    
-        randomMatches.forEach((match, index) => {
-            updateBoard(`.board${index}`, match.playerMoves, match.computerMoves);
-        });
+        window.matchHistoryData = data;
+        console.log("MatchHistory erfolgreich geladen:", data);
     })
     .catch(error => console.error("Fehler beim Laden der Match-Historie:", error));
-}
+});
 
- function filterMatches() {
-    console.log("LocalStorage direkt nach Laden der Seite:", localStorage.getItem("playerId"));
-    const playerId = localStorage.getItem('playerId');
-
-    if (!playerId) {
-        handleErrorMessages("data problem", "no playerid available");
+function load() {
+    const data = window.matchHistoryData;
+    if (!data) {
+        handleErrorMessages("Datenfehler", "Match-Daten noch nicht geladen");
         return;
     }
-    
-    fetch('http://localhost:8000/api/matchHistory', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ "playerId": playerId })
-    })
-    .then(response => response.json())
-    .then(data => {
 
-    
-        
-        let startdata = document.getElementById("dateFilter").value;
-        let enddata = document.getElementById("dateFilter2").value;
-        let result = document.querySelector('input[name="result"]:checked')?.value;
+    const randomMatches = data.sort(() => 0.5 - Math.random()).slice(0, 12);
 
-if (!Array.isArray(data) || data.length === 0) {
-    console.log("Keine Match-Daten vorhanden.");
-    return;
+    const updateBoard = (boardClass, playerMoves, computerMoves) => {
+        const board = document.querySelector(boardClass);
+        if (!board) return;
+
+        playerMoves.forEach(id => {
+            const button = board.querySelector(`button[id='${id}']`);
+            if (button) {
+                button.style.backgroundImage = "url('./img/player.png')";
+                button.style.backgroundSize = "cover";
+                button.style.backgroundPosition = "center";
+                button.disabled = true;
+            }
+        });
+
+        computerMoves.forEach(id => {
+            const button = board.querySelector(`button[id='${id}']`);
+            if (button) {
+                button.style.backgroundImage = "url('img/computer2.0.png')";
+                button.style.backgroundSize = "cover";
+                button.style.backgroundPosition = "center";
+                button.disabled = true;
+            }
+        });
+    };
+
+    randomMatches.forEach((match, index) => {
+        updateBoard(`.board${index}`, match.playerMoves, match.computerMoves);
+    });
 }
 
-console.log(result);
-console.log(startdata)
-const filteredDataStart = data.filter(entry => entry.started_at.startsWith(startdata));
-const filteredDataEnd = data.filter(entry => entry.ended_at.startsWith(enddata));
-const filteredDataResult = data.filter(entry => entry.verdict_id === Number(result));
-
-const commonEntries = filteredDataStart.filter(entry =>
-    filteredDataEnd.some(e => e.id === entry.id) &&
-    filteredDataResult.some(e => e.id === entry.id)
-);
-
-console.log("commonEntries ",commonEntries);
-
-console.log("start ",filteredDataStart);
-console.log("end ",filteredDataEnd);
-console.log(" result ",filteredDataResult);
-
-    
-        const updateBoard = (boardClass, playerMoves, computerMoves) => {
-            console.log("problem2.1");
-
-            const board = document.querySelector(boardClass);
-            if (!board) return;
-            console.log("problem2.1");
-
-            playerMoves.forEach(id => {
-                const button = board.querySelector(`button[id='${id}']`);
-                if (button) {
-                    button.style.backgroundImage = "url('./img/player.png')";
-                    button.style.backgroundSize = "cover";
-                    button.style.backgroundPosition = "center";
-                    button.disabled = true;
-                }
-            });
-    
-            computerMoves.forEach(id => {
-                const button = board.querySelector(`button[id='${id}']`);
-                if (button) {
-                    button.style.backgroundImage = "url('img/computer2.0.png')";
-                    button.style.backgroundSize = "cover";
-                    button.style.backgroundPosition = "center";
-                    button.disabled = true;
-                }
-            });
-        };
-       
-        commonEntries.forEach((match, index) => {
-
-            updateBoard(`.board${index}`, match.playerMoves, match.computerMoves);
-        }); 
-        filterMessages("works","Filter worked");
-
-        
-        
-    })
-    .catch(error => console.error("Fehler beim filter der Match-Historie:", error));
-    
- }
-
- function createTicTacToeBoards(numBoards) {
-    const container = document.getElementById("gameContainer");
-    for (let i = 0; i < numBoards; i++) {
-        let board = document.createElement("div");
-        board.classList.add("board" + i);
-        for (let j = 0; j < 9; j++) {
-            let button = document.createElement("button");
-            button.classList.add("button");
-            button.id = `${j + 1}`;
-            button.setAttribute("onclick", "match(this.id)");
-            board.appendChild(button);
-        }
-        container.appendChild(board);
+function filterMatches() {
+    const data = window.matchHistoryData;
+    if (!data) {
+        handleErrorMessages("Datenfehler", "Match-Daten noch nicht geladen");
+        return;
     }
+
+    let startdata = document.getElementById("dateFilter").value;
+    let enddata = document.getElementById("dateFilter2").value;
+    let result = document.querySelector('input[name="result"]:checked')?.value;
+
+    if (!Array.isArray(data) || data.length === 0) {
+        console.log("Keine Match-Daten vorhanden.");
+        return;
+    }
+
+    const filteredDataStart = startdata ? data.filter(entry => entry.started_at.startsWith(startdata)) : data;
+    const filteredDataEnd = enddata ? data.filter(entry => entry.ended_at.startsWith(enddata)) : data;
+    const filteredDataResult = result ? data.filter(entry => entry.verdict_id === Number(result)) : data;
+
+    const commonEntries = filteredDataStart.filter(entry =>
+        filteredDataEnd.some(e => e.id === entry.id) &&
+        filteredDataResult.some(e => e.id === entry.id)
+    );
+
+    const updateBoard = (boardClass, playerMoves, computerMoves) => {
+        const board = document.querySelector(boardClass);
+        if (!board) return;
+
+        playerMoves.forEach(id => {
+            const button = board.querySelector(`button[id='${id}']`);
+            if (button) {
+                button.style.backgroundImage = "url('./img/player.png')";
+                button.style.backgroundSize = "cover";
+                button.style.backgroundPosition = "center";
+                button.disabled = true;
+            }
+        });
+
+        computerMoves.forEach(id => {
+            const button = board.querySelector(`button[id='${id}']`);
+            if (button) {
+                button.style.backgroundImage = "url('img/computer2.0.png')";
+                button.style.backgroundSize = "cover";
+                button.style.backgroundPosition = "center";
+                button.disabled = true;
+            }
+        });
+    };
+
+    commonEntries.forEach((match, index) => {
+        updateBoard(`.board${index}`, match.playerMoves, match.computerMoves);
+    });
+
+    filterMessages("Filter", "Filter erfolgreich angewendet");
 }
-           
+    
 
 window.resetFilter = function() {
     document.getElementById("dateFilter").value = "";
