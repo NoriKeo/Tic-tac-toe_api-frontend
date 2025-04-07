@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Tic Tac Toe API Dokumentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background: url('img/background2.gif') no-repeat center center fixed;
+      background-size: cover; 
+    }
+    h1 {
+      color: #b88128;
+    }
+    details {
+      margin-bottom: 1rem;
+      background: #29d555;
+      border: 1px solid #06684d;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+    code {
+      background: #eee;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 8px;
+    }
+    p{
+        color: #b88128;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Tic Tac Toe API Dokumentation</h1>
+  <p>Version: 1.0.0</p>
+  <p>Beschreibung: API für Login, Account-Erstellung, Passwort-Reset, Matches, Match-Historie und Score</p>
+
+  <details>
+    <summary>POST /api/login – Spieler Login</summary>
+    <p><strong>Anfrage:</strong></p>
+    <pre>{
+  "playerName": "string",
+  "password": "string"
+}</pre>
+    <p><strong>Antwort (200):</strong></p>
+    <pre>{
+  "message": "string",
+  "playerId": 0
+}</pre>
+  </details>
+
+  <details>
+    <summary>POST /api/creataccount – Account erstellen</summary>
+    <p><strong>Anfrage:</strong></p>
+    <pre>{
+  "playerName": "string",
+  "password": "string",
+  "securityAnswer": "string"
+}</pre>
+    <p><strong>Antwort (200):</strong></p>
+    <pre>{
+  "message": "string"
+}</pre>
+  </details>
+
+  <details>
+    <summary>POST /api/newPassword – Passwort zurücksetzen</summary>
+    <p><strong>Anfrage:</strong></p>
+    <pre>{
+  "playerName": "string",
+  "password": "string",
+  "securityAnswer": "string"
+}</pre>
+    <p><strong>Antwort (200):</strong></p>
+    <pre>{
+  "message": "string"
+}</pre>
+  </details>
+
+  <details>
+    <summary>POST /api/matchHandler – Spielzug senden</summary>
+    <p><strong>Anfrage:</strong></p>
+    <pre>{
+  "playerId": 0,
+  "move": 0
+}</pre>
+    <p><strong>Antwort (200):</strong></p>
+    <pre>{
+  "message": "string",
+  "matchID": 0,
+  "move": 0,
+  "computerMove": 0,
+  "winner": 0,
+  "score": [0, 0, 0],
+  "playerPosition": [0, 1],
+  "computerPlays": [2, 4]
+}</pre>
+  </details>
+
+  <details>
+    <summary>POST /api/matchHistory – Match-Historie</summary>
+    <p><strong>Anfrage:</strong></p>
+    <pre>{
+  "playerId": 0
+}</pre>
+    <p><strong>Antwort (200):</strong></p>
+    <pre>[
+  {
+    "id": 1,
+    "started_at": "timestamp",
+    "ended_at": "timestamp",
+    "verdict_id": 1,
+    "playerMoves": [0, 1],
+    "computerMoves": [2, 3]
+  }
+]</pre>
+  </details>
+
+  <details>
+    <summary>POST /api/score – Score abfragen</summary>
+    <p><strong>Anfrage:</strong></p>
+    <pre>{
+  "playerId": 0
+}</pre>
+    <p><strong>Antwort (200):</strong></p>
+    <pre>{
+  "playerscore": 5,
+  "computerScore": 3,
+  "drawScore": 2
+}</pre>
+  </details>
+
+</body>
+</html>
