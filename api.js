@@ -191,3 +191,17 @@ function handleErrorMessages(errorType, message) {
     }, 5000);
 }
 
+function logout(){
+    localStorage.removeItem("playerId");
+    window.location.href = "init.html";
+
+}
+
+function showPasswordTemporarily() {
+    const input = document.getElementById('password');
+    input.type = 'text';
+
+    setTimeout(() => {
+      input.type = 'password';
+    }, 2000); 
+}

@@ -104,3 +104,35 @@ transform: translateX(-50%);
       font-size: 16px;
   }
 }
+
+.showPassword{
+  bottom: -290px; 
+  position: relative; 
+  border: none;
+  background-color: none;
+  background: none;
+  left: 10%;
+
+
+}
+
+.buttonPassword {
+    
+  border: none;
+  color: #464545;
+  padding: 20px 40px; 
+
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px; 
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: "Sour Gummy", sans-serif;
+
+  cursor: pointer;
+ 
+  transform: translateX(-50%); 
+
+
+}

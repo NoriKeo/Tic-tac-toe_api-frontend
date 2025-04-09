@@ -6,6 +6,10 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("load").addEventListener("click", load);
     document.getElementById("resetFilter").addEventListener("click", resetFilter);
 
+    
+});
+
+function load() {
     const playerId = localStorage.getItem('playerId');
     console.log("LocalStorage nach Laden der Seite:", playerId);
 
@@ -31,9 +35,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("MatchHistory erfolgreich geladen:", data);
     })
     .catch(error => console.error("Fehler beim Laden der Match-Historie:", error));
-});
-
-function load() {
     const data = window.matchHistoryData;
     if (!data) {
         handleErrorMessages("Datenfehler", "Match-Daten noch nicht geladen");
@@ -73,6 +74,31 @@ function load() {
 }
 
 function filterMatches() {
+    const playerId = localStorage.getItem('playerId');
+    console.log("LocalStorage nach Laden der Seite:", playerId);
+
+    if (!playerId) {
+        handleErrorMessages("data problem", "no playerid available");
+        return;
+    }
+
+    fetch('http://localhost:8000/api/matchHistory', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ "playerId": playerId })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (!Array.isArray(data) || data.length === 0) {
+            console.log("Keine Match-Daten vorhanden.");
+            return;
+        }
+        window.matchHistoryData = data;
+        console.log("MatchHistory erfolgreich geladen:", data);
+    })
+    .catch(error => console.error("Fehler beim Laden der Match-Historie:", error));
     const data = window.matchHistoryData;
     if (!data) {
         handleErrorMessages("Datenfehler", "Match-Daten noch nicht geladen");
